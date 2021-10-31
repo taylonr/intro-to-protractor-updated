@@ -57,7 +57,9 @@ angular
       };
 
       $scope.createNew = function () {
+        console.log("setting location");
         $location.path("/EventRatings/new");
+        console.log("location set");
       };
 
       $scope.calculateRatingQuality = function (rating) {
@@ -92,11 +94,10 @@ angular
     "$location",
     function ($scope, $http, $location) {
       $scope.submit = function () {
-        $http
-          .post("http://localhost:3030/events", $scope.event)
-          .then(({ data }) => {
-            $location.path(`/EventRatings/${data.id}`);
-          });
+        const data = $scope.event || $scope.item;
+        $http.post("http://localhost:3030/events", data).then(({ data }) => {
+          $location.path(`/EventRatings/${data.id}`);
+        });
       };
     },
   ]);

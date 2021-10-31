@@ -1,10 +1,15 @@
-describe('New Event screen: ', function(){
-  describe('When clicking the New Event button', function(){
-    it('should redirect to a new url', function(){
-      browser.get('http://localhost:3000/#!/EventRatings');
-      element(by.buttonText('New Event')).click();
+const { browser } = require("protractor");
 
-      expect(browser.getCurrentUrl()).toMatch('EventRatings/new');
+describe("Creating New Event", function () {
+  describe("When clicking the button", function () {
+    it("Should route to the new event page", function () {
+      browser.get("http://localhost:3000/#!/EventRatings");
+
+      element(by.buttonText("New Event")).click();
+
+      browser.waitForAngular();
+
+      expect(browser.getCurrentUrl()).toMatch("EventRatings/new");
     });
   });
 });

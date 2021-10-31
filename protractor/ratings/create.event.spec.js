@@ -1,40 +1,64 @@
-describe('Creating an event', function(){
-  describe('When the form is invalid', function(){
-    it('should have the submit button disabled', function(){
-      browser.get('http://localhost:3000/#!/EventRatings/new');
+var CreatePage = require("./pages/create.event.page.js"),
+  ListPage = require("./pages/event.list.page.js");
 
-      var button = element(by.buttonText('Create'));
+describe("Adding a new event", function () {
+  var css,
+    createPage = new CreatePage(),
+    listPage = new ListPage();
 
-      var css = button.getAttribute('class');
+  beforeEach(function () {
+    browser.get("http://localhost:3000/#!/EventRatings/new");
+  });
 
-      expect(css).toMatch('disabled');
+  describe("When the form is empty", function () {
+    it("Should disable the Create button", function () {
+      var css = createPage.getButtonClasses();
+
+      expect(css).toMatch("disabled");
     });
   });
 
-  describe('and specifying the name', function(){
-    it('should enable the create button', function(){
-      browser.get('http://localhost:3000/#!/EventRatings/new');
+  describe("When specifying the name", function () {
+    it("Should enable the Create button", function () {
+      createPage.setName("A Sample Event");
 
-      var name = element(by.model('event.name')).sendKeys('A Sample Event');
+      var css = createPage.getButtonClasses();
 
-      expect(element(by.buttonText('Create')).getAttribute('class')).not.toMatch('disabled');
+      expect(css).not.toMatch("disabled");
+    });
+
+    describe("When the name is too short", function () {
+      it("Should disable the create button", function () {
+        createPage.setName("ABC");
+
+        var css = createPage.getButtonClasses();
+
+        expect(css).toMatch("disabled");
+      });
+    });
+
+    describe("When the name is too long", function () {
+      it("Should disable the create button", function () {
+        createPage.setName(
+          "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz"
+        );
+
+        var css = createPage.getButtonClasses();
+
+        expect(css).toMatch("disabled");
+      });
     });
   });
 
-  describe('and saving the event', function(){
-    it('should add it to the event list', function(){
-      browser.get('http://localhost:3000/#!/EventRatings/new');
+  describe("When saving the form", function () {
+    it("Should add the event to the list", function () {
+      createPage.setName("Module 3");
 
-      var name = element(by.model('event.name')).sendKeys('My New Event');
-
-      element(by.buttonText('Create')).click();
+      createPage.saveData();
 
       browser.waitForAngular();
 
-      var list = element.all(by.binding('name'));
-
-      expect(list.getText()).toMatch('My New Event');
-
+      expect(listPage.getNameTexts()).toMatch("Module 3");
     });
   });
 });
