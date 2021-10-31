@@ -5,3 +5,5 @@ app/lib/
 tmp
 .DS_Store
 .idea
+
+.vscode/
