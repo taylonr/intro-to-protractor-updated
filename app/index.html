@@ -6,7 +6,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>My AngularJS App</title>
+  <title>Copper Pitch</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
@@ -51,15 +51,7 @@
             <a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
           </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
-          <li ui-route="/signup" ng-class="{active: $uiRoute}">
-            <a href="/#!/signup">Signup</a>
-          </li>
-          <li class="divider-vertical"></li>
-          <li ui-route="/signin" ng-class="{active: $uiRoute}">
-            <a href="/#!/signin">Signin</a>
-          </li>
-        </ul>
+
         <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
