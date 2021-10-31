@@ -1,0 +1,54 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "name": "Jazz on the Green",
+      "description": "Anchored by the green space of University Park, City Crossing is smack in historic downtown. A blend of shopping, entertainment and services. Grab a bite before or after the concert at one of the many mom-and-pop restaurants. Many of the merchants and restaurants offer specials on concert nights during Jazz on the Green. Learn about special promotions and offerings here or check our Facebook page.",
+      "ratings": [
+        {
+          "description": "Waste of time",
+          "rating": 1
+        },
+        {
+          "description": "Not great",
+          "rating": 2
+        },
+        {
+          "description": "me",
+          "rating": 2
+        },
+        {
+          "description": "Not as good as last year",
+          "rating": 3
+        },
+        {
+          "description": "Best one I've ever been to",
+          "rating": 5
+        },
+        {
+          "description": "The ground was wet and soggy",
+          "rating": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Railroad Days",
+      "description": "Testing json server",
+      "ratings": [
+        {
+          "description": "Ok",
+          "rating": 4
+        },
+        {
+          "description": "fine",
+          "rating": 4
+        },
+        {
+          "description": "good",
+          "rating": 4
+        }
+      ]
+    }
+  ]
+}

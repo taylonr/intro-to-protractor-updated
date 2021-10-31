@@ -12,21 +12,81 @@
   <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="lib/html5-boilerplate/dist/css/main.css">
   <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <link rel="stylesheet" href="ratings.css">
 </head>
 <body>
-  <ul class="menu">
-    <li><a href="#!/view1">view1</a></li>
-    <li><a href="#!/view2">view2</a></li>
-  </ul>
 
   <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
   <![endif]-->
+  <header class="navbar navbar-fixed-top navbar-inverse">
+    <div class="container">
+      <div class="navbar-header">
+        <button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/#!/" class="navbar-brand">copperPitch</a>
+      </div>
+      <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+        <ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
+          <li data-ng-repeat="item in menu.items" data-ng-if="item.shouldRender(authentication.user);"
+            ng-switch="item.menuItemType" ui-route="{{item.uiRoute}}" class="{{item.menuItemClass}}"
+            ng-class="{active: ($uiRoute)}" dropdown="item.menuItemType === 'dropdown'">
+            <a ng-switch-when="dropdown" class="dropdown-toggle">
+              <span data-ng-bind="item.title"></span>
+              <b class="caret"></b>
+            </a>
+            <ul ng-switch-when="dropdown" class="dropdown-menu">
+              <li data-ng-repeat="subitem in item.items" data-ng-if="subitem.shouldRender(authentication.user);"
+                ui-route="{{subitem.uiRoute}}" ng-class="{active: $uiRoute}">
+                <a href="/#!/{{subitem.link}}" data-ng-bind="subitem.title"></a>
+              </li>
+            </ul>
+            <a ng-switch-default href="/#!/{{item.link}}" data-ng-bind="item.title"></a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
+          <li ui-route="/signup" ng-class="{active: $uiRoute}">
+            <a href="/#!/signup">Signup</a>
+          </li>
+          <li class="divider-vertical"></li>
+          <li ui-route="/signin" ng-class="{active: $uiRoute}">
+            <a href="/#!/signin">Signin</a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <span data-ng-bind="authentication.user.displayName"></span> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="/#!/settings/profile">Edit Profile</a>
+              </li>
+              <li>
+                <a href="/#!/settings/accounts">Manage Social Accounts</a>
+              </li>
+              <li data-ng-show="authentication.user.provider === 'local'">
+                <a href="/#!/settings/password">Change Password</a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a href="/auth/signout">Signout</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-  <div ng-view></div>
-
-  <div>AngularJS seed app: v<span app-version></span></div>
+  <div ng-view class="content" ></div>
 
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
@@ -34,10 +94,6 @@
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular-route/angular-route.js"></script>
   <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view2/view2.js"></script>
-  <script src="core/version/version.js"></script>
-  <script src="core/version/version-directive.js"></script>
-  <script src="core/version/interpolate-filter.js"></script>
+  <script src="events/event.js"></script>
 </body>
 </html>

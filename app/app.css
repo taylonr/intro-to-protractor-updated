@@ -23,3 +23,58 @@
   content: "|";
   padding-right: 0.3em;
 }
+
+.content {
+  margin-top: 75px;
+  padding-left: 15%;
+  padding-right: 15%;
+}
+.undecorated-link:hover {
+  text-decoration: none;
+}
+[ng\:cloak],
+[ng-cloak],
+[data-ng-cloak],
+[x-ng-cloak],
+.ng-cloak,
+.x-ng-cloak {
+  display: none !important;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li.event.item {
+  font-size: x-large;
+  font-weight: bold;
+  padding: 10px;
+}
+
+h3 {
+  color: lightgray;
+}
+
+h4 {
+  margin-top: 20px;
+}
+
+span.bad {
+  color: red;
+}
+
+span.ok {
+  color: yellow;
+}
+
+span.good {
+  color: green;
+}
+
+form {
+  margin-top: 1em;
+}
+
+.event.list {
+  margin-top: 1em;
+}
