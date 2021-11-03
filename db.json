@@ -32,7 +32,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "d12396766e434aaf9d9ae16541feb8b2",
       "name": "Railroad Days",
       "description": "Testing json server",
       "ratings": [
@@ -49,14 +49,6 @@
           "rating": 4
         }
       ]
-    },
-    {
-      "name": "My New Event",
-      "id": 3
-    },
-    {
-      "name": "My New Event",
-      "id": "ydqFIGJ"
     }
   ]
 }
